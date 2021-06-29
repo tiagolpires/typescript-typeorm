@@ -1,9 +1,12 @@
+import 'reflect-metadata'
+import './database/connect'
 import express from 'express'
+import routes from './routes'
 
 const app = express()
 
-app.get('/', (req,res) => {
-    res.send('sucesss')
-})
+app.use(express.json())
+
+app.use('/', routes)
 
 app.listen(3001)

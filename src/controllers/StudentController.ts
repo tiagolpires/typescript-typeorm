@@ -7,7 +7,7 @@ class StudentController {
     async index(req: Request, res: Response) {
         const studentRepo = getRepository(Student)
         
-        const students = await studentRepo.find()
+        const students = await studentRepo.find({ relations: ['seat', 'notebooks', 'classes'] })
 
         res.json(students)
     }
@@ -15,13 +15,13 @@ class StudentController {
     async store(req: Request, res: Response) {
         const studentRepo = getRepository(Student)  
 
-        const { name } = req.body
+        const { name, seatId } = req.body
 
         const studentExists = await studentRepo.findOne({ where: { name } })
 
         if(studentExists) res.status(409).json({error: 'Student already exists'})
 
-        const student = studentRepo.create({ name })
+        const student = studentRepo.create({ name, seat: seatId })
         const studentData = await studentRepo.save(student)
         res.json(studentData)
     }

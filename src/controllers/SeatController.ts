@@ -6,7 +6,7 @@ class SeatController {
     async index(req: Request, res: Response) {
         const seatRepo = getRepository(Seat)
         
-        const seats = await seatRepo.find()
+        const seats = await seatRepo.find({ relations: ['student'] })
 
         res.json(seats)
     }

@@ -6,9 +6,9 @@ class classController {
     async index(req: Request, res: Response) {
         const classRepo = getRepository(Class)
         
-        const classs = await classRepo.find()
+        const classData = await classRepo.find({ relations: ['students'] })
 
-        res.json(classs)
+        res.json(classData)
     }
 
     async store(req: Request, res: Response) {

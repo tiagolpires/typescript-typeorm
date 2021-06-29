@@ -9,25 +9,14 @@ services:
             - "3001:3001"
         volumes:
             -  .:/app
-        networks:
-            - test-api
-        depends_on: 
-            - db
-        links:
-            - db
     db:
-        container_name: 'database-node'
+        container_name: 'mysql-node'
         image: mysql:5.7.31
         command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
         ports: 
             - '3306:3306'
-        networks:
-            - test-api
         environment: 
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: my_db
             MYSQL_USER: docker
             MYSQL_PASSWORD: docker
-networks:
-    test-api:
-        driver: bridge

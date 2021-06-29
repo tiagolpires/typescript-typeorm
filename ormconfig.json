@@ -1,6 +1,6 @@
 {
     "type": "mysql",
-    "host": "database-node",
+    "host": "mysql-node",
     "port": 3306,
     "username": "root",
     "password": "root",
